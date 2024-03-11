@@ -1,6 +1,6 @@
 import axios from "axios"
 
-async function sendRequest(url) {
+const sendRequest = async (url) => {
 	try {
 		const response = await axios.get(url, {
 			headers: {

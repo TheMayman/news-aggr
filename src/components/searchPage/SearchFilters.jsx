@@ -9,7 +9,7 @@ const SearchFilters = ({ allArticles, setFilteredArticlesData }) => {
 	const [startDate, setStartDate] = useState(null)
 	const [selectedSource, setSelectedSource] = useState(null)
 	const [selectedCategory, setSelectedCategory] = useState(null)
-	const minDate = new Date(MIN_SEARCH_DATE) // Set this to the first date that should be selectable
+	const minDate = new Date(MIN_SEARCH_DATE)
 	const sourceOptions = [
 		{ value: "news-api", label: "NewsAPI" },
 		{ value: "ny-times-api", label: "New York Times" },
@@ -30,9 +30,7 @@ const SearchFilters = ({ allArticles, setFilteredArticlesData }) => {
 		}
 		if (selectedCategory) {
 			filteredArticles = filteredArticles.filter(
-				(article) =>
-					article.category == selectedCategory.value ||
-					article.category == "business"
+				(article) => article.category == selectedCategory.value
 			)
 		}
 		if (selectedSource) {

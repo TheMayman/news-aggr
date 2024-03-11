@@ -32,18 +32,21 @@ const useFetchArticlesFromAPIs = (searchQuery) => {
 				queryFn: async () => sendRequest(URL_News_API),
 				enabled: searchQuery.length >= MIN_SEARCH_LENGTH,
 				retry: false,
+				refetchOnWindowFocus: false,
 			},
 			{
 				queryKey: ["articles_NYTimes", searchQuery],
 				queryFn: async () => sendRequest(URL_NY_TIMES),
 				enabled: searchQuery.length >= MIN_SEARCH_LENGTH,
 				retry: false,
+				refetchOnWindowFocus: false,
 			},
 			{
 				queryKey: ["articles_TheGuardian", searchQuery],
 				queryFn: async () => sendRequest(URL_THE_GUARDIAN),
 				enabled: searchQuery.length >= MIN_SEARCH_LENGTH,
 				retry: false,
+				refetchOnWindowFocus: false,
 			},
 		],
 	})
