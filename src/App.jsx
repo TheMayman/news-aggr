@@ -1,13 +1,8 @@
-import { ArticlesProvider } from "./contexts/ArticlesContext"
-import SearchPage from "./routes/SearchPage"
+import HomePage from "./routes/HomePage"
 import "./styles/App.scss"
 
 const App = () => {
-	return (
-		<ArticlesProvider>
-			<SearchPage />
-		</ArticlesProvider>
-	)
+	return <HomePage />
 }
 
 export default App

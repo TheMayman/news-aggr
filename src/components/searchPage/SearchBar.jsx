@@ -3,6 +3,7 @@ import SearchInput from "../common/SearchInput"
 import SearchButton from "../common/SearchButton"
 import { Field, Form, Formik } from "formik"
 import { MIN_SEARCH_LENGTH } from "../../config/config"
+import { useNavigate, useLocation } from "react-router-dom"
 
 const SearchBar = ({ setSearchQuery }) => {
 	const validationSchema = Yup.object().shape({
@@ -11,14 +12,20 @@ const SearchBar = ({ setSearchQuery }) => {
 			`Search query must be at least ${MIN_SEARCH_LENGTH} characters`
 		),
 	})
+	const navigate = useNavigate()
+	const location = useLocation()
 	return (
-		<div className="search-bar-container">
+		<div className="search-bar">
 			<Formik
 				initialValues={{
 					searchQuery: "",
 				}}
 				onSubmit={(values) => {
+					console.log("submitting")
 					setSearchQuery(values.searchQuery)
+					if (location.pathname !== "/search") {
+						navigate("/search")
+					}
 				}}
 				validationSchema={validationSchema}
 			>

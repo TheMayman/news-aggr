@@ -1,0 +1,10 @@
+.tag-container {
+	border-radius: 7px;
+	background-color: $input-background-color;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid $golden-color;
+	cursor: pointer;
+	&.selected {
+		background-color: $golden-color;
+	}
+}

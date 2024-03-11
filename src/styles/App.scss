@@ -3,12 +3,15 @@
 @import "./common/SearchInput.scss";
 @import "./common/SearchButton.scss";
 @import "./searchPage/SearchBar.scss";
+@import "./searchPage/SearchBarContainer.scss";
 @import "./common/ArticleCard.scss";
 @import "./searchPage/SearchFilters.scss";
 @import "./common/ResultsContainer.scss";
 @import "./common/NoResults.scss";
 @import "./common/ErrorContainer.scss";
 @import "./common/LoadingContainer.scss";
+@import "./homePage/homePageHero.scss";
+@import "./common/Tag.scss";
 
 html,
 body {
