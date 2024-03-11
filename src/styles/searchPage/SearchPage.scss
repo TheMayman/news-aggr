@@ -1,0 +1,10 @@
+.search-page {
+	padding: 1rem 2rem;
+	position: relative;
+
+	.loading,
+	.error {
+		text-align: center;
+		margin: 1.5rem 0;
+	}
+}

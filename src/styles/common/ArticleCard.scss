@@ -1,0 +1,31 @@
+.article {
+	border: 1px solid #ddd;
+	padding: 1rem 1.5rem;
+	border-radius: 7px;
+	&:hover {
+		border-color: $golden-color;
+	}
+	a {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		gap: 1rem;
+	}
+	.article-image {
+		width: 100%;
+		height: 12rem;
+		object-fit: cover;
+		border-radius: 7px;
+		&.default {
+			object-fit: contain;
+		}
+	}
+	.article-title {
+		margin: 0.5rem 0;
+		color: $font-color-primary;
+	}
+	.article-description {
+		color: $font-color-primary;
+	}
+}

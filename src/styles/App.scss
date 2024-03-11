@@ -1,0 +1,30 @@
+@import "./variables.scss";
+@import "./searchPage/SearchPage.scss";
+@import "./common/SearchInput.scss";
+@import "./common/SearchButton.scss";
+@import "./searchPage/SearchBar.scss";
+@import "./common/ArticleCard.scss";
+@import "./searchPage/SearchFilters.scss";
+@import "./common/ResultsContainer.scss";
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+}
+#root {
+	width: 100%;
+	height: 100%;
+}
+body {
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	position: relative;
+}
+@media (min-width: 1280px) {
+	body {
+		font-size: 1vw;
+	}
+}

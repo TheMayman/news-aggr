@@ -1,0 +1,24 @@
+.results {
+	margin-top: 15rem;
+	.articles-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+}
+
+@media (min-width: 600px) {
+	.results {
+		.articles-container {
+			grid-template-columns: repeat(2, minmax(15rem, 1fr));
+		}
+	}
+}
+
+@media (min-width: 1024px) {
+	.results {
+		.articles-container {
+			grid-template-columns: repeat(4, minmax(20rem, 1fr));
+		}
+	}
+}
