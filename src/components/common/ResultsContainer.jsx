@@ -8,10 +8,6 @@ const ResultsContainer = ({ articles, isSuccess, isLoading, error }) => {
 		return <LoadingContainer />
 	}
 
-	if (error) {
-		return <ErrorContainer />
-	}
-
 	if (isSuccess && articles?.length > 0) {
 		return (
 			<div className="results">
@@ -20,6 +16,7 @@ const ResultsContainer = ({ articles, isSuccess, isLoading, error }) => {
 						<ArticleCard article={article} key={index} />
 					))}
 				</div>
+				{error && <ErrorContainer />}
 			</div>
 		)
 	}
