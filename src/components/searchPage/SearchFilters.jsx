@@ -4,12 +4,13 @@ import "react-datepicker/dist/react-datepicker.css"
 import Select from "react-select"
 import { customDropDownStyles } from "../../config/config"
 import FilterContainer from "../common/FilterContainer"
+import { useNavigate } from "react-router-dom"
 
 const SearchFilters = ({ allArticles, setFilteredArticlesData }) => {
 	const [startDate, setStartDate] = useState(null)
 	const [selectedSource, setSelectedSource] = useState(null)
 	const [selectedCategory, setSelectedCategory] = useState(null)
-
+	const navigate = useNavigate()
 	const sourceOptions = [
 		{ value: "news-api", label: "NewsAPI" },
 		{ value: "ny-times-api", label: "New York Times" },
@@ -81,6 +82,9 @@ const SearchFilters = ({ allArticles, setFilteredArticlesData }) => {
 					isDisabled={allArticles.length <= 0}
 				/>
 			</FilterContainer>
+			<div className="news-feed-button">
+				<button onClick={() => navigate("/")}>Back to news feed</button>
+			</div>
 		</div>
 	)
 }

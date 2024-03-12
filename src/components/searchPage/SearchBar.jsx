@@ -21,7 +21,6 @@ const SearchBar = ({ setSearchQuery }) => {
 					searchQuery: "",
 				}}
 				onSubmit={(values) => {
-					console.log("submitting")
 					setSearchQuery(values.searchQuery)
 					if (location.pathname !== "/search") {
 						navigate("/search")
@@ -29,7 +28,7 @@ const SearchBar = ({ setSearchQuery }) => {
 				}}
 				validationSchema={validationSchema}
 			>
-				{({ setFieldValue, handleSubmit }) => (
+				{({ setFieldValue, handleSubmit, values }) => (
 					<Form className="search-form">
 						<label htmlFor="searchQuery">Search</label>
 						<Field
@@ -41,7 +40,10 @@ const SearchBar = ({ setSearchQuery }) => {
 								setFieldValue("searchQuery", value)
 							}}
 						/>
-						<SearchButton submit={handleSubmit} />
+						<SearchButton
+							submit={handleSubmit}
+							searchQuery={values.searchQuery}
+						/>
 					</Form>
 				)}
 			</Formik>
