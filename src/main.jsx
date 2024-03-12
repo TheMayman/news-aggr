@@ -11,18 +11,21 @@ import App from "./App.jsx"
 
 const queryClient = new QueryClient()
 
-const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <App />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "search",
-		element: <SearchPage />,
-		errorElement: <ErrorPage />,
-	},
-])
+const router = createBrowserRouter(
+	[
+		{
+			path: "/",
+			element: <App />,
+			errorElement: <ErrorPage />,
+		},
+		{
+			path: "search",
+			element: <SearchPage />,
+			errorElement: <ErrorPage />,
+		},
+	],
+	{ basename: "/news-aggr" }
+)
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
