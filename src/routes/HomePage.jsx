@@ -3,10 +3,10 @@ import SearchBar from "../components/searchPage/SearchBar"
 import { ArticlesContext } from "../contexts/ArticlesContext"
 import Tag from "../components/common/Tag"
 import ResultsContainer from "../components/common/ResultsContainer"
-import { checkIfSourceAvailable } from "../helpers/checkIfSourceAvailable"
 
 const HomePage = () => {
 	const [selectedTags, setSelectedTags] = useState([])
+	const [searched, setSearched] = useState(false)
 	const {
 		allArticles,
 		setSearchQuery,
@@ -47,7 +47,7 @@ const HomePage = () => {
 			return acc
 		}, {})
 		setCriteria(groupedTags)
-		console.log(checkIfSourceAvailable(groupedTags, "NY Times"), "sss")
+		setSearched(true)
 	}
 	return (
 		<section className="home-page-container">
@@ -69,18 +69,24 @@ const HomePage = () => {
 				))}
 			</div>
 			<div className="news-feed-button">
-				<button onClick={() => handleNewsFeed(selectedTags)}>
+				<button
+					onClick={() => handleNewsFeed(selectedTags)}
+					disabled={selectedTags.length < 1}
+				>
 					Get News Feed
 				</button>
 			</div>
-			<div className="results-container">
-				<ResultsContainer
-					articles={allArticles}
-					error={error}
-					isLoading={isLoading}
-					isSuccess={isSuccess}
-				/>
-			</div>
+			{searched > 0 && (
+				<div className="results-container">
+					<ResultsContainer
+						selectedTags={selectedTags}
+						articles={allArticles}
+						error={error}
+						isLoading={isLoading}
+						isSuccess={isSuccess}
+					/>
+				</div>
+			)}
 		</section>
 	)
 }

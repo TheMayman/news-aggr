@@ -20,8 +20,10 @@
 		height: 100%;
 		min-height: 25rem;
 	}
-	.news-feed-button{
+	.news-feed-button button {
 		margin-top: 2rem;
+		padding: 1rem 1.5rem;
+		width: fit-content;
 	}
 }
 @media (min-width: 900px) {
