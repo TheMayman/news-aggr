@@ -2,14 +2,14 @@ import { useEffect, useState } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import Select from "react-select"
-import { MIN_SEARCH_DATE, customDropDownStyles } from "../../config/config"
+import { customDropDownStyles } from "../../config/config"
 import FilterContainer from "../common/FilterContainer"
 
 const SearchFilters = ({ allArticles, setFilteredArticlesData }) => {
 	const [startDate, setStartDate] = useState(null)
 	const [selectedSource, setSelectedSource] = useState(null)
 	const [selectedCategory, setSelectedCategory] = useState(null)
-	const minDate = new Date(MIN_SEARCH_DATE)
+
 	const sourceOptions = [
 		{ value: "news-api", label: "NewsAPI" },
 		{ value: "ny-times-api", label: "New York Times" },
@@ -56,7 +56,6 @@ const SearchFilters = ({ allArticles, setFilteredArticlesData }) => {
 					showIcon
 					selected={startDate}
 					onChange={(date) => setStartDate(date)}
-					minDate={minDate}
 					className="date-picker"
 					placeholderText="Select a date"
 					disabled={allArticles.length <= 0}

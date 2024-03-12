@@ -1,9 +1,10 @@
 .search-bar-fixed-container {
-	position: fixed;
+	position: sticky;
 	top: 0;
 	left: 0rem;
 	right: 0rem;
 	background-color: $background-color;
 	border-bottom: 1px solid $golden-color;
 	padding: 2rem;
+	
 }

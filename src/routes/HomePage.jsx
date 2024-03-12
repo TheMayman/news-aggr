@@ -3,6 +3,7 @@ import SearchBar from "../components/searchPage/SearchBar"
 import { ArticlesContext } from "../contexts/ArticlesContext"
 import Tag from "../components/common/Tag"
 import ResultsContainer from "../components/common/ResultsContainer"
+import { checkIfSourceAvailable } from "../helpers/checkIfSourceAvailable"
 
 const HomePage = () => {
 	const [selectedTags, setSelectedTags] = useState([])
@@ -46,6 +47,7 @@ const HomePage = () => {
 			return acc
 		}, {})
 		setCriteria(groupedTags)
+		console.log(checkIfSourceAvailable(groupedTags, "NY Times"), "sss")
 	}
 	return (
 		<section className="home-page-container">
