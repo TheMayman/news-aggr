@@ -21,7 +21,7 @@ const processAPIResults = (results) => {
 						}
 					case 1: // NY Times API
 						return {
-							category: article?.news_desk.toLowerCase(),
+							category: article?.news_desk?.toLowerCase(),
 							date: article?.pub_date,
 							description: article?.snippet,
 							image: article?.multimedia[0]?.url
@@ -33,7 +33,7 @@ const processAPIResults = (results) => {
 						}
 					case 2: // The Guardian API
 						return {
-							category: article?.sectionId.toLowerCase(),
+							category: article?.sectionId?.toLowerCase(),
 							date: article?.webPublicationDate,
 							description: "",
 							image: article?.fields?.thumbnail,

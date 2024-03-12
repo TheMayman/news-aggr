@@ -1,54 +1,50 @@
 import { useQueries } from "@tanstack/react-query"
-import sendRequest from "../helpers/sendRequest"
 import mergeArrays from "../helpers/mergeArrays"
 import processAPIResults from "../helpers/processAPIResults"
-import { MIN_SEARCH_DATE, MIN_SEARCH_LENGTH } from "../config/config"
-// import { format } from "date-fns"
-const useFetchArticlesFromAPIs = (searchQuery) => {
+import { MIN_SEARCH_DATE } from "../config/config"
+import { generateNewsAPIURL } from "../helpers/generateNewsAPIURL"
+import { generateNYTimesURL } from "../helpers/generateNYTimesURL"
+import { generateTheGuardianURL } from "../helpers/generateTheGuardianURL"
+import { createQueries } from "../helpers/createQueries"
+const useFetchArticlesFromAPIs = (searchQuery = null, criteria = null) => {
 	const date_News_API = MIN_SEARCH_DATE
 	const date_NY_TIMES = MIN_SEARCH_DATE.replace(/-/g, "")
 	const date_THE_GUARDIAN = MIN_SEARCH_DATE
-	//sometimes API doesn't return any results for the current date, so we need to get the results from the previous day
-	// const date_News_API = format(
-	// 	new Date(new Date().getTime() - 24 * 60 * 60 * 1000),
-	// 	"yyyy-MM-dd"
-	// )
-	// const date_NY_TIMES = format(new Date(), "yyyyMMdd")
-	// const date_THE_GUARDIAN = format(new Date(), "yyyy-MM-dd")
 
-	const URL_News_API = `https://newsapi.org/v2/everything?q=${searchQuery}&from=${date_News_API}&language=en&sortBy=popularity&apiKey=${
-		import.meta.env.VITE_NEWS_API_KEY
-	}`
-	const URL_NY_TIMES = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchQuery}&begin_date=${date_NY_TIMES}&api-key=${
-		import.meta.env.VITE_NY_TIMES_API_KEY
-	}`
-	const URL_THE_GUARDIAN = `https://content.guardianapis.com/search?q=${searchQuery}&from-date=${date_THE_GUARDIAN}&show-fields=headline,thumbnail&order-by=relevance&api-key=${
-		import.meta.env.VITE_THE_GUARDIAN_API_KEY
-	}`
+	const newsAPIs = [
+		{
+			key: "articles_NewsAPI",
+			URL: generateNewsAPIURL(
+				searchQuery,
+				criteria,
+				date_News_API,
+				import.meta.env.VITE_NEWS_API_KEY
+			),
+			source: "NewsAPI",
+		},
+		{
+			key: "articles_NYTimes",
+			URL: generateNYTimesURL(
+				searchQuery,
+				criteria,
+				date_NY_TIMES,
+				import.meta.env.VITE_NY_TIMES_API_KEY
+			),
+			source: "NY Times",
+		},
+		{
+			key: "articles_TheGuardian",
+			URL: generateTheGuardianURL(
+				searchQuery,
+				criteria,
+				date_THE_GUARDIAN,
+				import.meta.env.VITE_THE_GUARDIAN_API_KEY
+			),
+			source: "The Guardian",
+		},
+	]
 	const results = useQueries({
-		queries: [
-			{
-				queryKey: ["articles_NewsAPI", searchQuery],
-				queryFn: async () => sendRequest(URL_News_API),
-				enabled: searchQuery.length >= MIN_SEARCH_LENGTH,
-				retry: false,
-				refetchOnWindowFocus: false,
-			},
-			{
-				queryKey: ["articles_NYTimes", searchQuery],
-				queryFn: async () => sendRequest(URL_NY_TIMES),
-				enabled: searchQuery.length >= MIN_SEARCH_LENGTH,
-				retry: false,
-				refetchOnWindowFocus: false,
-			},
-			{
-				queryKey: ["articles_TheGuardian", searchQuery],
-				queryFn: async () => sendRequest(URL_THE_GUARDIAN),
-				enabled: searchQuery.length >= MIN_SEARCH_LENGTH,
-				retry: false,
-				refetchOnWindowFocus: false,
-			},
-		],
+		queries: createQueries(newsAPIs, searchQuery, criteria),
 	})
 
 	const articles = processAPIResults(results)
@@ -58,7 +54,7 @@ const useFetchArticlesFromAPIs = (searchQuery) => {
 	return {
 		allArticles,
 		isLoading: results.some((result) => result.isLoading),
-		isSuccess: results.every((result) => result.isSuccess),
+		isSuccess: results.some((result) => result.isSuccess),
 		error: results.find((result) => result.error)?.error,
 	}
 }

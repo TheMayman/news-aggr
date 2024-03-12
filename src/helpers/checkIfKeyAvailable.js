@@ -1,0 +1,1 @@
+export const checkIfKeyAvailable = (criteria) => criteria?.length > 0

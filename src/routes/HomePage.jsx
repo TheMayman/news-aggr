@@ -1,18 +1,26 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import SearchBar from "../components/searchPage/SearchBar"
 import { ArticlesContext } from "../contexts/ArticlesContext"
 import Tag from "../components/common/Tag"
+import ResultsContainer from "../components/common/ResultsContainer"
 
 const HomePage = () => {
-	const { setSearchQuery } = useContext(ArticlesContext)
 	const [selectedTags, setSelectedTags] = useState([])
+	const {
+		allArticles,
+		setSearchQuery,
+		setCriteria,
+		isLoading,
+		isSuccess,
+		error,
+	} = useContext(ArticlesContext)
 	const tags = [
 		{ text: "NY Times", type: "source" },
 		{ text: "The Guardian", type: "source" },
 		{ text: "NewsAPI", type: "source" },
-		{ text: "Sports", type: "category" },
-		{ text: "Technology", type: "category" },
-		{ text: "Business", type: "category" },
+		{ text: "football", type: "category" },
+		{ text: "technology", type: "category" },
+		{ text: "business", type: "category" },
 		{ text: "Tim Hardwick", type: "author" },
 		{ text: "Hartley Charlton", type: "author" },
 		{ text: "Kris Holt", type: "author" },
@@ -28,10 +36,17 @@ const HomePage = () => {
 			}
 		})
 	}
-	useEffect(() => {
-		console.log(selectedTags, "selectedTags")
-	}, [selectedTags])
 
+	const handleNewsFeed = (selectedTags) => {
+		const groupedTags = selectedTags.reduce((acc, tag) => {
+			if (!acc[tag.type]) {
+				acc[tag.type] = []
+			}
+			acc[tag.type].push(tag.text)
+			return acc
+		}, {})
+		setCriteria(groupedTags)
+	}
 	return (
 		<section className="home-page-container">
 			<h1>Welcome to the News Aggregator</h1>
@@ -50,6 +65,19 @@ const HomePage = () => {
 						onToggle={() => handleTagToggle(tag)}
 					/>
 				))}
+			</div>
+			<div className="news-feed-button">
+				<button onClick={() => handleNewsFeed(selectedTags)}>
+					Get News Feed
+				</button>
+			</div>
+			<div className="results-container">
+				<ResultsContainer
+					articles={allArticles}
+					error={error}
+					isLoading={isLoading}
+					isSuccess={isSuccess}
+				/>
 			</div>
 		</section>
 	)

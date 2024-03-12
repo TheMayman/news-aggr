@@ -6,8 +6,10 @@ export const ArticlesContext = createContext()
 
 export const ArticlesProvider = ({ children }) => {
 	const [searchQuery, setSearchQuery] = useState("")
+	const [criteria, setCriteria] = useState([])
 	const { allArticles, isLoading, isSuccess, error } = useFetchArticlesFromAPIs(
 		searchQuery,
+		criteria,
 		MIN_SEARCH_LENGTH
 	)
 
@@ -16,6 +18,8 @@ export const ArticlesProvider = ({ children }) => {
 			value={{
 				searchQuery,
 				setSearchQuery,
+				criteria,
+				setCriteria,
 				allArticles,
 				isLoading,
 				isSuccess,

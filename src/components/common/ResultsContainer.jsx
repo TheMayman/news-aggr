@@ -24,7 +24,7 @@ const ResultsContainer = ({ articles, isSuccess, isLoading, error }) => {
 		)
 	}
 
-	if (!isLoading && !error && articles?.length === 0) {
+	if (articles?.length === 0) {
 		return <NoResults />
 	}
 
