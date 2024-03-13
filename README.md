@@ -27,6 +27,7 @@ and navigate to `http://localhost:5173/news-aggr`.
  - Update UI
  - Use js libraries https://github.com/PorterK/GuardianJSClient
  - Refactor components
+ - Paginate api to show more results
 
 ## Licensing
 
