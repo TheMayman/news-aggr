@@ -1,8 +1,33 @@
-# React + Vite
+# News aggr
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Customize your news feed by selecting tags or use the search to find news articles
 
-Currently, two official plugins are available:
+## Installing / Developing
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+First build image
+
+```shell
+docker build -t news-aggr .
+```
+
+Second run the docker image.
+
+```shell
+ docker run -p 5173:5173 news-aggr
+```
+
+The default PORT is:
+- `5173` for the client
+```
+
+and navigate to `http://localhost:5173/news-aggr`.
+
+## Future work
+ - Use RTK
+ - Update UI
+ - Use js libraries https://github.com/PorterK/GuardianJSClient
+ - Refactor components
+
+## Licensing
+
+MIT
